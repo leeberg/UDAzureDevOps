@@ -27,12 +27,16 @@ While (1 -eq 1) {
     $Disks = Get-WmiObject Win32_LogicalDisk 
     $Disks | ForEach-Object{
         
-       $DiskStats += [PSCustomObject]@{
-            #User = $_
-            DiskLabel = $_.name
-            DiskFree = ([math]::Round(($_.FreeSpace) / ($_.Size),2) *100)
-            
+        if($_.Size -ne $null)
+        {
+            $DiskStats += [PSCustomObject]@{
+                #User = $_
+                DiskLabel = $_.name
+                DiskFree = ([math]::Round(($_.FreeSpace) / ($_.Size),2) *100)
+                
+            }
         }
+       
 
         
     }
@@ -49,7 +53,7 @@ While (1 -eq 1) {
         $Processes += [PSCustomObject]@{
             Name = $_.InstanceName 
             CPUUsage = [math]::Round($_.cookedvalue)
-            MemoryUsage = 0
+            MemoryUsage = (Get-Random -Minimum 0 -Maximum 5)  # FOR DEMO ONLY TODO FIX OMG
         }
         
     }
@@ -74,7 +78,7 @@ While (1 -eq 1) {
     $Processes = $Processes | Sort-Object -Property CPUUsage,MemoryUsage -Descending | Select-Object -First 5
     #>
 
-    <#
+    
     # Event Logs
     $EventLogs = @()
     Get-EventLog -LogName System -Newest 5 | Select-Object -Property TimeGenerated,EntryType,Message | ForEach-Object{
@@ -97,7 +101,7 @@ While (1 -eq 1) {
 
 
     #Last Logged In
-    $LastLoggedIn = Get-Process -IncludeUserName | Select-Object -Property username -Unique | Where-Object { $_ -notmatch 'SYSTEM|admin' }
+    #$LastLoggedIn = Get-Process -IncludeUserName | Select-Object -Property username -Unique | Where-Object { $_ -notmatch 'SYSTEM|admin' }
 
 
     #>

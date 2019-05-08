@@ -31,7 +31,7 @@ New-UDPage -Name "Host_Status" -Icon podcast -Endpoint {
     New-UDLayout -Columns 2 -Content {  
 
 
-        New-UDGrid -Title "Top 5 Processes" -Headers @("Name","CPU Usage %","Memory Usage %") -Properties @("Name","CPUUsage","MemoryUsage") -Endpoint {    
+        New-UDGrid -Id "HostStatusProcesses" -Title "Top 5 Processes" -Headers @("Name","CPU Usage %","Memory Usage %") -Properties @("Name","CPUUsage","MemoryUsage") -Endpoint {    
         
             # Get The Computer Status I have selected...
             # Read the Processe
@@ -50,7 +50,7 @@ New-UDPage -Name "Host_Status" -Icon podcast -Endpoint {
         }
     
 
-        New-UDGrid -Title "Last 5 System Events" -Headers @("Name","CPU Usage %","Memory Usage %") -Properties @("Name","CPUUsage","MemoryUsage") -Endpoint {    
+        New-UDGrid -Id "HostEventsProcesses" -Title "Last 5 System Events" -Headers @("Name","CPU Usage %","Memory Usage %") -Properties @("Name","CPUUsage","MemoryUsage") -Endpoint {    
         
             # Get The Computer Status I have selected...
             # Read the Processe

@@ -31,7 +31,8 @@ $ComputerStatsEndpoint = New-UDEndpoint -Url "/hoststats" -Method "POST" -Argume
     $ComptuterStatusObject = $Body | ConvertFrom-Json
     $Cache:ComputerStatus += $ComptuterStatusObject
    
-    Sync-UDElement -Id 'HostStatusStats' -Broadcast
+    Sync-UDElement -Id 'HostStatsDiskChart' -Broadcast
+    Sync-UDElement -Id 'HostStatusProcesses' -Broadcast
 }
 
 

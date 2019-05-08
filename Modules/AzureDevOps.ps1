@@ -118,8 +118,9 @@ Function Get-WorkItems
         $uri = "https://dev.azure.com/$organization/$projectName/_apis/wit/workitems/$WorkItemID"+'?api-version=5.0'
         $WorkItem = Invoke-RestMethod -Uri $uri -Method GET -ContentType "application/json" -Headers @{Authorization=("Basic {0}" -f $Cache:base64AuthInfo)}
 
-        $RetrievedWorkItems += $_
+        $RetrievedWorkItems += $WorkItem 
 
+       
         <# 
         Work Items Properties
             System.Title
